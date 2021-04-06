@@ -1,0 +1,51 @@
+/* Wrapper */
+.wrapper {
+}
+
+/* rows */
+.rows {
+  display: block;
+  width: max-content;
+}
+
+.rows > .row:nth-child(1) {
+  border-bottom: solid 1px grey;
+}
+
+.rows > .row:nth-child(3) {
+  border-top: solid 1px grey;
+}
+
+.rows > .row > .box:nth-child(2) {
+  border-left: solid 1px grey;
+  border-right: solid 1px grey;
+}
+
+/* Row  */
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Box */
+.box {
+  display: block;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 50px;
+}
+
+.box:hover {
+  background-color: rgba(250, 215, 166, 0.185);
+}
+
+.rows,
+.wrapper,
+.row,
+.box {
+  box-sizing: border-box;
+}
