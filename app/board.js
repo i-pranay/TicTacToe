@@ -1,5 +1,6 @@
 //TODO: Make this a iffe or class
 
+/* #region Variables */
 // User Data
 const defaultTick = "";
 const boardSize = 3;
@@ -7,6 +8,10 @@ const boardSize = 3;
 let board = Array.apply(null, Array(boardSize)).map((x, e) =>
   Array.apply(null, Array(boardSize)).map((x, i) => `${defaultTick}`)
 );
+
+/* #endregion */
+
+/* #region Events start */
 
 function updateBoard(rowIndex, colIndex, type) {
   // Update board
@@ -21,6 +26,10 @@ function areSuccessValues(valuesList) {
   return new Set(valuesList).size === 1 && valuesList[0] !== defaultTick;
 }
 
+/* #endregion */
+
+/* #region Utilities */
+
 function isDiagonalElement(rowIndex, colIndex) {
   return rowIndex === colIndex;
 }
@@ -28,6 +37,8 @@ function isDiagonalElement(rowIndex, colIndex) {
 function isAntiDiagonalElement(rowIndex, colIndex) {
   return rowIndex + colIndex === boardSize - 1;
 }
+
+/* #endregion */
 
 function getGameStatus(rowIndex, colIndex) {
   // Game status object
@@ -42,7 +53,7 @@ function getGameStatus(rowIndex, colIndex) {
 
   // Row check
   if (!res.won) {
-    console.log("row check");
+    // console.log("row check");
     areSuccessValues(board[rowIndex]) &&
       (res.won = true) &&
       (res.winRow = rowIndex);
@@ -50,7 +61,7 @@ function getGameStatus(rowIndex, colIndex) {
 
   // Col check
   if (!res.won) {
-    console.log("col check");
+    // console.log("col check");
 
     areSuccessValues(board.map((r, i) => r[colIndex])) &&
       (res.won = true) &&
@@ -59,7 +70,7 @@ function getGameStatus(rowIndex, colIndex) {
 
   // Diagonal check
   if (!res.won && isDiagonalElement(rowIndex, colIndex)) {
-    console.log("diag check");
+    // console.log("diag check");
 
     areSuccessValues(
       board.map((r, i) => {
@@ -70,7 +81,7 @@ function getGameStatus(rowIndex, colIndex) {
 
   // Anti diagonal check
   if (!res.won && isAntiDiagonalElement(rowIndex, colIndex)) {
-    console.log("anti diag check");
+    // console.log("anti diag check");
 
     areSuccessValues(board.map((r, i) => r[Math.abs(2 - i)])) &&
       (res.antiDiagonalWin = res.won = true);
@@ -85,6 +96,8 @@ function getGameStatus(rowIndex, colIndex) {
   return res;
 }
 
+/* #region On Win UI Highlighters.. TODO:Need work. */
+
 function onRowWin(rowIndex) {}
 function onColWin(colIndex) {}
 function onDiagonalWin() {}
@@ -92,8 +105,6 @@ function onAntiDiagonalWin() {}
 
 function updateSuccessCells() {}
 
-function getBoard() {
-  return board;
-}
+/* #endregion */
 
-export { updateBoard, getBoard };
+export { updateBoard };
